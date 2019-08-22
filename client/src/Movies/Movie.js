@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import MovieCard from "./MovieCard";
+import {Link} from 'react-router-dom';
 
 export default class Movie extends React.Component {
   constructor(props) {
@@ -51,6 +52,9 @@ export default class Movie extends React.Component {
         <button className="save-button" onClick={this.saveMovie}>
           Save
         </button>
+        <Link className="edit-button">
+          Edit
+        </Link>
         <button className="delete-button" onClick={this.deleteMovie}>
           Delete
         </button>
