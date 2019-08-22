@@ -43,7 +43,7 @@ const EditMovie = props => {
     return (
         <form className='movieForm' onSubmit={handleSubmit}>
             <div className='input'>
-                <label htmlfor='title'>Title: </label>
+                <label htmlFor='title'>Title: </label>
                     <input
                         type='text'
                         name='title'
@@ -53,7 +53,7 @@ const EditMovie = props => {
                     />
             </div>
             <div className='input'>
-                <label htmlfor='director'>Director: </label>
+                <label htmlFor='director'>Director: </label>
                     <input
                     type='text'
                     name='director'
@@ -63,7 +63,7 @@ const EditMovie = props => {
                     />
             </div>
             <div className='input'>
-                <label htmlfor='metascore'>Metascore: </label>
+                <label htmlFor='metascore'>Metascore: </label>
                     <input
                     type='number'
                     name='metascore'
@@ -72,7 +72,8 @@ const EditMovie = props => {
                     onChange={handleChange}
                     />
             </div>
-            <label >Stars: </label>
+            <div className='input'>
+            <label htmlFor='stars'>Stars: </label>
                 {edit.stars.map((star, i) => {
                     return (
                         <div>
@@ -85,7 +86,8 @@ const EditMovie = props => {
                         </div>
                     )
                 })}
-            <button>Update?</button>
+            </div>
+            <button>Update</button>
         </form>
     );
 }
