@@ -37,7 +37,7 @@ export default class Movie extends React.Component {
     axios
     .delete(`http://localhost:5000/api/movies/${this.props.match.params.id}`)
     .then(res=>{
-      this.props.history.push('/');
+      this.props.history.push('/movies');
     })
   };
 
@@ -52,7 +52,7 @@ export default class Movie extends React.Component {
         <button className="save-button" onClick={this.saveMovie}>
           Save
         </button>
-        <Link className="edit-button">
+        <Link to={`/update-movie/${this.state.movie.id}`} className="edit-button">
           Edit
         </Link>
         <button className="delete-button" onClick={this.deleteMovie}>

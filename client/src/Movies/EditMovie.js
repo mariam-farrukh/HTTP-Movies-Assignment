@@ -85,7 +85,7 @@ const EditMovie = props => {
                         </div>
                     )
                 })}
-            <button>Edit</button>
+            <button>Update?</button>
         </form>
     );
 }
