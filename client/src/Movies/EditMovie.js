@@ -4,29 +4,38 @@ import axios from "axios";
 const EditMovie = props => {
     const [edit, setEdit] = useState({ id: 0, title: '', director: '', metascore: 0, stars: [] });
 
-    const fetchMovie = id => {
-        axios
-            .get(`http://localhost:5000/api/movies/${id}`)
-            .then(res => {
-                console.log('res in edit movie', res)
-                setEdit({ ...res.data, id: id });
-            })
-            .catch(err => console.log(err.response));
-    };
-
     useEffect(() => {
-        fetchMovie(props.match.params.id);
-    }, []);
+        axios
+        .get(`http://localhost:5000/api/movies/${props.match.params.id}`)
+        .then(res => {
+            console.log('res in edit movie', res)
+            setEdit({ ...res.data, id: props.match.params.id });
+        })
+        .catch(err => console.log(err.response));
+
+    }, [])
 
     const handleChange = e => {
         setEdit({ ...edit, [e.target.name]: e.target.value });
     }
 
+    const addStar = e => {
+        e.preventDefault();
+        setEdit({...edit, stars: [...edit.stars,'']
+        });
+      }
+
     const handleChangeStars = (e, i) => {
-        let starsChange = edit.stars.slice();
-        starsChange[i] = e.target.value;
-        setEdit({ ...edit, stars: starsChange });
-    }
+        // First way of doing this
+        // let starsChange = edit.stars.slice();
+        // starsChange[i] = e.target.value;
+        // setEdit({ ...edit, stars: starsChange });
+        // The above is one way of doing this, but it doesn't make the onChange clean
+        // Second (and cleaner) way of setting this up
+        setEdit({...edit, stars: edit.stars.map((star, starIndex) => {
+            return starIndex === index ? e.target.value: star;
+        })});
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -81,12 +90,15 @@ const EditMovie = props => {
                             type='text'
                             name={`stars`}
                             value={star}
-                            onChange={(e) => handleChangeStars(e, i)}
+                            // onChange={(e) => handleChangeStars(e, i)} note that this is the first way with the onChange
+                            onChange={handleChangeStars(index)}
+                            //this is the second 
                             />
                         </div>
                     )
                 })}
             </div>
+            <button onClick={addStar}>Add Star</button>
             <button>Update</button>
         </form>
     );
